@@ -10,7 +10,7 @@ import cookie from "js-cookie";
 
 export default function Home() {
   const [email, setEmail] = useState<string>("");
-  const [token,setToken] = useState(cookie.get("token") || null);
+  const [token,setToken] = useState(cookie.get("token") || '');
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -35,19 +35,19 @@ export default function Home() {
           cookie.set("token", response.data.token, { expires: 0.001 });
           cookie.set("email", response.data.email, { expires: 0.001 });
         }
-        fetchResidents();
+        fetchResidents(response.data.token);
       } catch (e: any) {
         console.log(e.response.data);
       }
     }
   };
 
-  const fetchResidents = async () => {
+  const fetchResidents = async (token:string) => {
     setIsLoading(true);
     try{
       const [residents, programs] = await Promise.all([
-        getResidents(),
-        getPrograms(),
+        getResidents(token),
+        getPrograms(token),
       ]);
       setIsLoading(false);
       const residentData = convertArrayToObject(residents.data, "id");
@@ -64,8 +64,7 @@ export default function Home() {
   useEffect(() => {
     if (token) {
       setIsAuthorized(true);
-      fetchResidents();
-      
+      fetchResidents(token);   
     }
     else{
       setIsLoading(false)

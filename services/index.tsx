@@ -5,19 +5,24 @@ const API = axios.create({
     baseURL: `https://welbi.org/api/`
   });
 const token = Cookies.get('token')
-  let options = {
+const options =(token:string)=>{
+ return(
+  {
     headers: {
       Authorization: 'Bearer '+token
     }
-  };
+  }
+ )
+}
+
 
 export const getAuthToken = (payload:any): Promise<any> => {
     return API.post(`start`,payload)
 }
 
-export const getResidents = (): Promise<any> => {
-  return API.get(`residents`,options)
+export const getResidents = (token:string): Promise<any> => {
+  return API.get(`residents`,(options(token)))
 }
-export const getPrograms = (): Promise<any> => {
-  return API.get(`programs`,options)
+export const getPrograms = (token:string): Promise<any> => {
+  return API.get(`programs`,(options(token)))
 }
