@@ -1,9 +1,14 @@
 import { InputProps } from "@/interfaces"
 
-export  const  InputBox = ( {onChange}:InputProps)=> {
+export  const  InputBox = ( {onChange,onClick}:InputProps)=> {
+  const onKeyDownHandler = (e:any)=>{
+    if (e.key === 'Enter') {
+      onClick&& onClick();
+    }
+  }
     return (
       <>
-        <input onChange={(e)=>onChange(e)} className="inpt__cn" />
+        <input onKeyDown={onKeyDownHandler} onChange={(e)=>onChange(e)} className="inpt__cn" />
         <style jsx>
             {
                 `

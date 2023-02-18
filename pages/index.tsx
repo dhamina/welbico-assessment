@@ -83,7 +83,7 @@ export default function Home() {
       {!isAuthorized && (
         <div className="app__cn__hme__cn">
           <TextElement text="Please enter an email to proceed further." />
-          <InputBox onChange={onEmailChange} />
+          <InputBox onClick={onClickHandler} onChange={onEmailChange} />
           <div className="app__cn__hme__cn__btn__cn">
             <Button label={"Submit"} onClick={onClickHandler} />
           </div>

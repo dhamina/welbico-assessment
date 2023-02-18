@@ -2,9 +2,10 @@ import { ButtonProps } from "@/interfaces";
 
 
 export const Button = ({ label, onClick }: ButtonProps) => {
+ 
   return (
     <>
-      <button className="btn__cn" onClick={() => onClick()}>{label}</button>
+      <button  className="btn__cn" onClick={() => onClick()}>{label}</button>
       <style jsx>
         {
          `

@@ -9,4 +9,5 @@ export type ButtonProps = {
 
   export type InputProps = {
     onChange:Function,
+    onClick?:Function
   };
