@@ -11,10 +11,6 @@ const token = Cookies.get('token')
     }
   };
 
-// function getAllStores() {
-//     return API.get('https://sls.magzter.com/magservices/prod/getStores')
-// }
-
 export const getAuthToken = (payload:any): Promise<any> => {
     return API.post(`start`,payload)
 }
