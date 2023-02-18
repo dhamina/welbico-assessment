@@ -12,7 +12,7 @@ export default function Home() {
   const [email, setEmail] = useState<string>("");
   const [token,setToken] = useState(cookie.get("token") || null);
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [residents, setResidents] = useState<Array<any>>([]);
   const [programs, setPrograms] = useState<Array<any>>([]);
@@ -65,6 +65,10 @@ export default function Home() {
     if (token) {
       setIsAuthorized(true);
       fetchResidents();
+      
+    }
+    else{
+      setIsLoading(false)
     }
     setInterval(() => {
       const newToken = cookie.get('token');
@@ -80,7 +84,7 @@ export default function Home() {
     <div
       className={`app__cn ${(!isAuthorized || isLoading) && "full__height"}`}
     >
-      {!isAuthorized && (
+      {!isAuthorized && !isLoading && (
         <div className="app__cn__hme__cn">
           <TextElement text="Please enter an email to proceed further." />
           <InputBox onClick={onClickHandler} onChange={onEmailChange} />
